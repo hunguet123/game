@@ -1,10 +1,42 @@
+#include "BaseObject.h"
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
-#include "BaseObject.h"
-#include "Dot.h"
 
+
+
+//The dot that will move around on the screen
+class Dot
+{
+    public:
+		//The dimensions of the dot
+		static const int DOT_WIDTH = 20;
+		static const int DOT_HEIGHT = 20;
+
+		//Maximum axis velocity of the dot
+		static const int DOT_VEL = 2;
+
+		//Initializes the variables
+		Dot();
+
+		//Takes key presses and adjusts the dot's velocity
+		void handleEvent( SDL_Event& e );
+
+		//Moves the dot
+		void move();
+
+		//Shows the dot on the screen
+		void render(SDL_Rect* clip);
+
+    private:
+		//The X and Y offsets of the dot
+		int mPosX, mPosY;
+
+		//The velocity of the dot
+		int mVelX, mVelY;
+};
 
 //Starts up SDL and creates window
 bool init();
@@ -15,12 +47,86 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+
+//The window renderer
+SDL_Renderer* gRenderer = NULL;
 
 //Scene textures
-LTexture Character;
-LTexture gBackgroundTexture;
+LTexture gDotTexture;
+LTexture gBackground;
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
+
+
+Dot::Dot()
+{
+    //Initialize the offsets
+    mPosX = 0;
+    mPosY = 0;
+
+    //Initialize the velocity
+    mVelX = 0;
+    mVelY = 0;
+}
+
+void Dot::handleEvent( SDL_Event& e )
+{
+    //If a key was pressed
+	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: mVelY -= DOT_VEL; break;
+            case SDLK_DOWN: mVelY += DOT_VEL; break;
+            case SDLK_LEFT: mVelX -= DOT_VEL; break;
+            case SDLK_RIGHT: mVelX += DOT_VEL; break;
+        }
+    }
+    //If a key was released
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: mVelY += DOT_VEL; break;
+            case SDLK_DOWN: mVelY -= DOT_VEL; break;
+            case SDLK_LEFT: mVelX += DOT_VEL; break;
+            case SDLK_RIGHT: mVelX -= DOT_VEL; break;
+        }
+    }
+}
+
+void Dot::move()
+{
+    //Move the dot left or right
+    mPosX += mVelX;
+
+    //If the dot went too far to the left or right
+    if( ( mPosX < 0 ) || ( mPosX + DOT_WIDTH > SCREEN_WIDTH ) )
+    {
+        //Move back
+        mPosX -= mVelX;
+    }
+
+    //Move the dot up or down
+    mPosY += mVelY;
+
+    //If the dot went too far up or down
+    if( ( mPosY < 0 ) || ( mPosY + DOT_HEIGHT > SCREEN_HEIGHT ) )
+    {
+        //Move back
+        mPosY -= mVelY;
+    }
+}
+
+void Dot::render(SDL_Rect* clip)
+{
+    //Show the dot
+	gDotTexture.render( mPosX, mPosY, clip, gRenderer );
+}
 
 bool init()
 {
@@ -50,8 +156,8 @@ bool init()
 		}
 		else
 		{
-			//Create renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_PRESENTVSYNC );
+			//Create vsynced renderer for window
+			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 			if( gRenderer == NULL )
 			{
 				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -81,13 +187,13 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	//Load Foo' texture
-	if( !Character.loadFromFile( "img//char.png", gRenderer ) )
+	//Load dot texture
+	if( !gDotTexture.loadFromFile( "char.png", gRenderer ) )
 	{
-		printf( "Failed to load Foo' texture image!\n" );
+		printf( "Failed to load dot texture!\n" );
 		success = false;
 	}
-    else
+        else
     {
         //Set sprite clips
         int x = 0, y = 0;
@@ -100,22 +206,14 @@ bool loadMedia()
 		x+= 57;
         }
 	}
-
-	//Load background texture
-	if( !gBackgroundTexture.loadFromFile( "img//bk2.png", gRenderer ) )
-	{
-		printf( "Failed to load background texture image!\n" );
-		success = false;
-	}
-
+	gBackground.loadFromFile("bk2.png", gRenderer);
 	return success;
 }
 
 void close()
 {
 	//Free loaded images
-	Character.free();
-	gBackgroundTexture.free();
+	gDotTexture.free();
 
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
@@ -150,9 +248,9 @@ int main( int argc, char* args[] )
 			//Event handler
 			SDL_Event e;
 
-            Dot dot;
+			//The dot that will be moving around on the screen
+			Dot dot;
             int frame = 0;
-            bool stand = true;
 			//While application is running
 			while( !quit )
 			{
@@ -164,21 +262,21 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-					dot.handleEvent(e);
+
+					//Handle input for the dot
+					dot.handleEvent( e );
 				}
 
-                dot.move();
+				//Move the dot
+				dot.move();
 
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
-
-				//Render background texture to screen
-                gBackgroundTexture.render(0,0 , NULL, gRenderer, 0.0, NULL, SDL_FLIP_NONE );
-
+				gBackground.render(0,0,NULL, gRenderer);
                 SDL_Rect* currentClip = &CharacterClips[ frame/6 ];
 				//Render Foo' to the screen
-                dot.render(Character, currentClip);
+                dot.render(currentClip);
                 //Character.render(0,0 , gRenderer, currentClip);
 				SDL_RenderPresent( gRenderer );
 				++frame;
@@ -197,3 +295,4 @@ int main( int argc, char* args[] )
 
 	return 0;
 }
+

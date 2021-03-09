@@ -1,4 +1,5 @@
 #include "BaseObject.h"
+
 LTexture::LTexture()
 {
 	//Initialize
@@ -53,6 +54,7 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer* gRenderer )
 	mTexture = newTexture;
 	return mTexture != NULL;
 }
+
 
 void LTexture::free()
 {
@@ -109,4 +111,6 @@ int LTexture::getHeight()
 {
 	return mHeight;
 }
+
+
 

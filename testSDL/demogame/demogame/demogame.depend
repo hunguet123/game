@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1615261799 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
+	"BaseObject.h"
+
+1615261850 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+
+1615261548 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+	"BaseObject.h"
+

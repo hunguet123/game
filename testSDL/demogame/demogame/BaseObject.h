@@ -1,19 +1,13 @@
-#ifndef BASE_OBJECT_H
-#define BASE_OBJECT_H
+#ifndef BASEOBJECT_H_
+#define BASEOBJECT_H_
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 1400;
+const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 600;
-
-//The window we'll be rendering to
-static SDL_Window* gWindow = NULL;
-
-//The window renderer
-static SDL_Renderer* gRenderer = NULL;
 
 //Texture wrapper class
 class LTexture
@@ -56,5 +50,4 @@ class LTexture
 		int mHeight;
 };
 
-
-#endif // BASE_OBJECT_H
+#endif // BASEOBJECT_H_
