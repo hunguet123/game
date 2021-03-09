@@ -1,42 +1,5 @@
 #include "BaseObject.h"
-
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
-#include <string>
-
-
-
-//The dot that will move around on the screen
-class Dot
-{
-    public:
-		//The dimensions of the dot
-		static const int DOT_WIDTH = 20;
-		static const int DOT_HEIGHT = 20;
-
-		//Maximum axis velocity of the dot
-		static const int DOT_VEL = 2;
-
-		//Initializes the variables
-		Dot();
-
-		//Takes key presses and adjusts the dot's velocity
-		void handleEvent( SDL_Event& e );
-
-		//Moves the dot
-		void move();
-
-		//Shows the dot on the screen
-		void render(SDL_Rect* clip);
-
-    private:
-		//The X and Y offsets of the dot
-		int mPosX, mPosY;
-
-		//The velocity of the dot
-		int mVelX, mVelY;
-};
+#include "character.h"
 
 //Starts up SDL and creates window
 bool init();
@@ -58,75 +21,6 @@ LTexture gDotTexture;
 LTexture gBackground;
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
-
-
-Dot::Dot()
-{
-    //Initialize the offsets
-    mPosX = 0;
-    mPosY = 0;
-
-    //Initialize the velocity
-    mVelX = 0;
-    mVelY = 0;
-}
-
-void Dot::handleEvent( SDL_Event& e )
-{
-    //If a key was pressed
-	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP: mVelY -= DOT_VEL; break;
-            case SDLK_DOWN: mVelY += DOT_VEL; break;
-            case SDLK_LEFT: mVelX -= DOT_VEL; break;
-            case SDLK_RIGHT: mVelX += DOT_VEL; break;
-        }
-    }
-    //If a key was released
-    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP: mVelY += DOT_VEL; break;
-            case SDLK_DOWN: mVelY -= DOT_VEL; break;
-            case SDLK_LEFT: mVelX += DOT_VEL; break;
-            case SDLK_RIGHT: mVelX -= DOT_VEL; break;
-        }
-    }
-}
-
-void Dot::move()
-{
-    //Move the dot left or right
-    mPosX += mVelX;
-
-    //If the dot went too far to the left or right
-    if( ( mPosX < 0 ) || ( mPosX + DOT_WIDTH > SCREEN_WIDTH ) )
-    {
-        //Move back
-        mPosX -= mVelX;
-    }
-
-    //Move the dot up or down
-    mPosY += mVelY;
-
-    //If the dot went too far up or down
-    if( ( mPosY < 0 ) || ( mPosY + DOT_HEIGHT > SCREEN_HEIGHT ) )
-    {
-        //Move back
-        mPosY -= mVelY;
-    }
-}
-
-void Dot::render(SDL_Rect* clip)
-{
-    //Show the dot
-	gDotTexture.render( mPosX, mPosY, clip, gRenderer );
-}
 
 bool init()
 {
@@ -214,7 +108,7 @@ void close()
 {
 	//Free loaded images
 	gDotTexture.free();
-
+    gBackground.free();
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
@@ -248,8 +142,7 @@ int main( int argc, char* args[] )
 			//Event handler
 			SDL_Event e;
 
-			//The dot that will be moving around on the screen
-			Dot dot;
+			character dinosaur;
             int frame = 0;
 			//While application is running
 			while( !quit )
@@ -262,13 +155,10 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-
-					//Handle input for the dot
-					dot.handleEvent( e );
+					dinosaur.handleEvent( e );
 				}
 
-				//Move the dot
-				dot.move();
+				dinosaur.move();
 
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
@@ -276,8 +166,9 @@ int main( int argc, char* args[] )
 				gBackground.render(0,0,NULL, gRenderer);
                 SDL_Rect* currentClip = &CharacterClips[ frame/6 ];
 				//Render Foo' to the screen
-                dot.render(currentClip);
-                //Character.render(0,0 , gRenderer, currentClip);
+                double PosX = dinosaur.PosX();
+                double PosY = dinosaur.PosY();
+                gDotTexture.render(PosX, PosY,currentClip, gRenderer);
 				SDL_RenderPresent( gRenderer );
 				++frame;
 

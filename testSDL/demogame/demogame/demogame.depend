@@ -8,6 +8,13 @@
 	<stdio.h>
 	<string>
 
-1615261548 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+1615277567 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+	"BaseObject.h"
+	"character.h"
+
+1615277463 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
+	"character.h"
+
+1615277463 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
 	"BaseObject.h"
 
