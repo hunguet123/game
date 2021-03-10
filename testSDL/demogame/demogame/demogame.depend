@@ -1,20 +1,27 @@
 # depslib dependency file v1.0
-1615261799 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
 	"BaseObject.h"
 
-1615261850 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
+1615304905 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
 
-1615277567 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
 	"BaseObject.h"
 	"character.h"
+	"barrier.h"
 
-1615277463 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
 	"character.h"
 
-1615277463 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
+1615304905 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
 	"BaseObject.h"
+
+1615304977 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
+	"BaseObject.h"
+
+1615304509 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
+	"barrier.h"
 

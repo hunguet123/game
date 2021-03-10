@@ -1,20 +1,5 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
-#include <string>
 #include "BaseObject.h"
-
-
-enum KeyPress
-{
-	KEY_PRESS_SURFACE_DEFAULT,
-	KEY_PRESS_SURFACE_UP,
-	KEY_PRESS_SURFACE_DOWN,
-	KEY_PRESS_SURFACE_LEFT,
-	KEY_PRESS_SURFACE_RIGHT,
-	KEY_PRESS_SURFACE_TOTAL
-};
-
+#include "character.h"
 
 //Starts up SDL and creates window
 bool init();
@@ -25,10 +10,15 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+
+//The window renderer
+SDL_Renderer* gRenderer = NULL;
 
 //Scene textures
-LTexture Character;
-LTexture gBackgroundTexture;
+LTexture Dinosour;
+LTexture gBackground;
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
 
@@ -60,8 +50,8 @@ bool init()
 		}
 		else
 		{
-			//Create renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_PRESENTVSYNC );
+			//Create vsynced renderer for window
+			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 			if( gRenderer == NULL )
 			{
 				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -91,13 +81,13 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	//Load Foo' texture
-	if( !Character.loadFromFile( "img//char.png", gRenderer ) )
+	//Load dot texture
+	if( !Dinosour.loadFromFile( "img//char.png", gRenderer ) )
 	{
-		printf( "Failed to load Foo' texture image!\n" );
+		printf( "Failed to load dot texture!\n" );
 		success = false;
 	}
-    else
+        else
     {
         //Set sprite clips
         int x = 0, y = 0;
@@ -110,23 +100,15 @@ bool loadMedia()
 		x+= 57;
         }
 	}
-
-	//Load background texture
-	if( !gBackgroundTexture.loadFromFile( "img//bk2.png", gRenderer ) )
-	{
-		printf( "Failed to load background texture image!\n" );
-		success = false;
-	}
-
+	gBackground.loadFromFile("img//bk.png", gRenderer);
 	return success;
 }
 
 void close()
 {
 	//Free loaded images
-	Character.free();
-	gBackgroundTexture.free();
-
+	Dinosour.free();
+    gBackground.free();
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
@@ -159,13 +141,9 @@ int main( int argc, char* args[] )
 
 			//Event handler
 			SDL_Event e;
-            int location_figure_x = 160;
-            int location_figure_y = 120;
-            int background_x = 0;
-            int background_y = 0;
 
+			character dinosaur;
             int frame = 0;
-            bool stand = true;
 			//While application is running
 			while( !quit )
 			{
@@ -177,50 +155,22 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-					else if (e.type == SDL_KEYDOWN)
-                    {
-                        switch (e.key.keysym.sym)
-                        {
-                            case SDLK_UP:
-							location_figure_y -= 6;
-							stand = false;
-							break;
-
-							case SDLK_DOWN:
-							location_figure_y += 6;
-							stand = false;
-							break;
-
-							case SDLK_LEFT:
-							background_x += 3;
-							location_figure_x -= 3;
-							stand = false;
-							break;
-
-							case SDLK_RIGHT:
-							background_x -= 3;
-							location_figure_x += 3;
-							stand = false;
-							break;
-							default:
-                            stand = true;
-                        }
-                    }
+					dinosaur.handleEvent( e );
 				}
 
-                if (location_figure_x >= 1200 ) location_figure_x = 0;
-                else if (location_figure_x <= 0) location_figure_x = 1200;
+				dinosaur.move();
+
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
-
-				//Render background texture to screen
-				gBackgroundTexture.render( background_x, background_y, gRenderer );
-
-                SDL_Rect* currentClip = &CharacterClips[ frame / 6 ];
+				gBackground.render(0,0,NULL, gRenderer);
+                SDL_Rect* currentClip = &CharacterClips[ frame/6 ];
 				//Render Foo' to the screen
-				if (stand != true) Character.render( location_figure_x, location_figure_y, gRenderer, currentClip );
-                else Character.render( location_figure_x, location_figure_y, gRenderer, &CharacterClips[0] );
+                double PosX = dinosaur.PosX();
+                double PosY = dinosaur.PosY();
+                //dinosaur.render(Dinosour, currentClip, gRenderer);
+                Dinosour.render(PosX, PosY,currentClip, gRenderer);
+
 				SDL_RenderPresent( gRenderer );
 				++frame;
 
@@ -238,3 +188,4 @@ int main( int argc, char* args[] )
 
 	return 0;
 }
+

@@ -1,6 +1,6 @@
 #include "BaseObject.h"
 #include "character.h"
-
+#include "barrier.h"
 //Starts up SDL and creates window
 bool init();
 
@@ -17,8 +17,9 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 //Scene textures
-LTexture gDotTexture;
+LTexture DinosourTexture;
 LTexture gBackground;
+LTexture barrierTexture;
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
 
@@ -82,7 +83,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load dot texture
-	if( !gDotTexture.loadFromFile( "char.png", gRenderer ) )
+	if( !DinosourTexture.loadFromFile( "img//char.png", gRenderer ) )
 	{
 		printf( "Failed to load dot texture!\n" );
 		success = false;
@@ -100,15 +101,17 @@ bool loadMedia()
 		x+= 57;
         }
 	}
-	gBackground.loadFromFile("bk2.png", gRenderer);
+	barrierTexture.loadFromFile("img//cactus.png", gRenderer);
+	gBackground.loadFromFile("img//bk.png", gRenderer);
 	return success;
 }
 
 void close()
 {
 	//Free loaded images
-	gDotTexture.free();
+	DinosourTexture.free();
     gBackground.free();
+    barrierTexture.free();
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
@@ -143,6 +146,8 @@ int main( int argc, char* args[] )
 			SDL_Event e;
 
 			character dinosaur;
+
+			barrier cactus;
             int frame = 0;
 			//While application is running
 			while( !quit )
@@ -159,7 +164,7 @@ int main( int argc, char* args[] )
 				}
 
 				dinosaur.move();
-
+                cactus.move();
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
@@ -168,7 +173,12 @@ int main( int argc, char* args[] )
 				//Render Foo' to the screen
                 double PosX = dinosaur.PosX();
                 double PosY = dinosaur.PosY();
-                gDotTexture.render(PosX, PosY,currentClip, gRenderer);
+                //dinosaur.render(Dinosour, currentClip, gRenderer);
+                DinosourTexture.render(PosX, PosY,currentClip, gRenderer);
+                //cactus.render(barrierTexture, gRenderer);
+                double CacTusX = cactus.x();
+                double CacTusY = cactus.y();
+                barrierTexture.render(CacTusX, CacTusY, NULL, gRenderer);
 				SDL_RenderPresent( gRenderer );
 				++frame;
 

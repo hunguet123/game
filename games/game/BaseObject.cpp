@@ -1,4 +1,5 @@
 #include "BaseObject.h"
+
 LTexture::LTexture()
 {
 	//Initialize
@@ -13,7 +14,7 @@ LTexture::~LTexture()
 	free();
 }
 
-bool LTexture::loadFromFile( std::string path, SDL_Renderer* gRenderer)
+bool LTexture::loadFromFile( std::string path, SDL_Renderer* gRenderer )
 {
 	//Get rid of preexisting texture
 	free();
@@ -23,7 +24,6 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer* gRenderer)
 
 	//Load image at specified path
 	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-
 	if( loadedSurface == NULL )
 	{
 		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
@@ -31,8 +31,8 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer* gRenderer)
 	else
 	{
 		//Color key image
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xff, 0xff ) );
-        SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 255, 255, 255 ) );
+		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
+
 		//Create texture from surface pixels
         newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
 		if( newTexture == NULL )
@@ -54,6 +54,7 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer* gRenderer)
 	mTexture = newTexture;
 	return mTexture != NULL;
 }
+
 
 void LTexture::free()
 {
@@ -85,19 +86,20 @@ void LTexture::setAlpha( Uint8 alpha )
 	SDL_SetTextureAlphaMod( mTexture, alpha );
 }
 
-
-void LTexture::render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect *clip )
+void LTexture::render( int x, int y, SDL_Rect* clip, SDL_Renderer* gRenderer, double angle, SDL_Point* center, SDL_RendererFlip flip )
 {
 	//Set rendering space and render to screen
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-		//Set clip rendering dimensions
+
+	//Set clip rendering dimensions
 	if( clip != NULL )
 	{
 		renderQuad.w = clip->w;
 		renderQuad.h = clip->h;
 	}
 
-	SDL_RenderCopy( gRenderer, mTexture, clip, &renderQuad );
+	//Render to screen
+	SDL_RenderCopyEx( gRenderer, mTexture, clip, &renderQuad, angle, center, flip );
 }
 
 int LTexture::getWidth()
@@ -109,3 +111,6 @@ int LTexture::getHeight()
 {
 	return mHeight;
 }
+
+
+

@@ -1,19 +1,13 @@
-#ifndef BASE_OBJECT_H
-#define BASE_OBJECT_H
+#ifndef BASEOBJECT_H_
+#define BASEOBJECT_H_
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 1400;
-const int SCREEN_HEIGHT = 600;
-
-//The window we'll be rendering to
-static SDL_Window* gWindow = NULL;
-
-//The window renderer
-static SDL_Renderer* gRenderer = NULL;
+const int SCREEN_WIDTH = 1200;
+const int SCREEN_HEIGHT = 700;
 
 //Texture wrapper class
 class LTexture
@@ -26,12 +20,12 @@ class LTexture
 		~LTexture();
 
 		//Loads image at specified path
-		bool loadFromFile( std::string path, SDL_Renderer* gRenderer);
+		bool loadFromFile( std::string path, SDL_Renderer* gRenderer );
 
 		//Deallocates texture
 		void free();
 
-        //Set color modulation
+		//Set color modulation
 		void setColor( Uint8 red, Uint8 green, Uint8 blue );
 
 		//Set blending
@@ -41,7 +35,7 @@ class LTexture
 		void setAlpha( Uint8 alpha );
 
 		//Renders texture at given point
-		void render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect *clip = NULL );
+		void render( int x, int y, SDL_Rect* clip = NULL, SDL_Renderer* gRenderer = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
 
 		//Gets image dimensions
 		int getWidth();
@@ -56,4 +50,4 @@ class LTexture
 		int mHeight;
 };
 
-#endif // BASE_OBJECT_H
+#endif // BASEOBJECT_H_
