@@ -20,6 +20,7 @@ SDL_Renderer* gRenderer = NULL;
 LTexture DinosourTexture;
 LTexture gBackground;
 LTexture barrierTexture;
+LTexture plotTexture;
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
 
@@ -102,6 +103,7 @@ bool loadMedia()
         }
 	}
 	barrierTexture.loadFromFile("img//cactus.png", gRenderer);
+	plotTexture.loadFromFile("img//plot.png", gRenderer);
 	gBackground.loadFromFile("img//bk.png", gRenderer);
 	return success;
 }
@@ -148,6 +150,8 @@ int main( int argc, char* args[] )
 			character dinosaur;
 
 			barrier cactus;
+
+			barrier plot;
             int frame = 0;
 			//While application is running
 			while( !quit )
@@ -165,6 +169,7 @@ int main( int argc, char* args[] )
 
 				dinosaur.move();
                 cactus.move();
+                plot.move();
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
@@ -179,6 +184,10 @@ int main( int argc, char* args[] )
                 double CacTusX = cactus.x();
                 double CacTusY = cactus.y();
                 barrierTexture.render(CacTusX, CacTusY, NULL, gRenderer);
+
+                double plotX = plot.x() - 1280 ;
+                double plotY = plot.y() + 54;
+                plotTexture.render(plotX,plotY,NULL,gRenderer);
 				SDL_RenderPresent( gRenderer );
 				++frame;
 

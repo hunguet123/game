@@ -2,13 +2,14 @@
 1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
 	"BaseObject.h"
 
-1615304905 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
+1615652432 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
+	<SDL_mixer.h>
 
-1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+1615645428 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
 	"BaseObject.h"
 	"character.h"
 	"barrier.h"
@@ -22,6 +23,6 @@
 1615304977 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
 	"BaseObject.h"
 
-1615304509 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
+1615645269 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
 	"barrier.h"
 

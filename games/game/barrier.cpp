@@ -2,13 +2,13 @@
 
 barrier::barrier()
 {
-    PosX = 1280;
+    PosX = 1300;
     PosY = 545;
 }
 
 void barrier::move()
 {
-    if (PosX < 0) PosX = 1280;
+    if (PosX < 0) PosX = 1300;
     PosX -= barrier_speed;
     barrier_speed+= 0.001;
 }

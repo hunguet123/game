@@ -35,19 +35,19 @@ class LTexture
 		void setAlpha( Uint8 alpha );
 
 		//Renders texture at given point
-		void render( int x, int y, SDL_Rect* clip = NULL, SDL_Renderer* gRenderer = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
+		void render( double x, double y, SDL_Rect* clip = NULL, SDL_Renderer* gRenderer = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
 
 		//Gets image dimensions
-		int getWidth();
-		int getHeight();
+		double getWidth();
+		double getHeight();
 
 	private:
 		//The actual hardware texture
 		SDL_Texture* mTexture;
 
 		//Image dimensions
-		int mWidth;
-		int mHeight;
+		double mWidth;
+		double mHeight;
 };
 
 #endif // BASEOBJECT_H_

@@ -1,39 +1,53 @@
 # depslib dependency file v1.0
-1615261799 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
 	"BaseObject.h"
 
-1615284601 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
+1615304905 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
 
-1615291304 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
 	"BaseObject.h"
 	"character.h"
+	"barrier.h"
 
-1615298281 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
 	"character.h"
 
-1615300857 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
+1615304905 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
 	"BaseObject.h"
 
-1615261799 source:c:\users\hahung\onedrive\máy tính\game\games\game\baseobject.cpp
+1615304977 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
 	"BaseObject.h"
 
-1615284601 c:\users\hahung\onedrive\máy tính\game\games\game\baseobject.h
+1615305447 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
+	"barrier.h"
+
+1615305447 source:c:\users\hahung\onedrive\máy tính\game\games\game\barrier.cpp
+	"barrier.h"
+
+1615304977 c:\users\hahung\onedrive\máy tính\game\games\game\barrier.h
+	"BaseObject.h"
+
+1615304905 c:\users\hahung\onedrive\máy tính\game\games\game\baseobject.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
 
-1615301410 source:c:\users\hahung\onedrive\máy tính\game\games\game\character.cpp
-	"character.h"
-
-1615300857 c:\users\hahung\onedrive\máy tính\game\games\game\character.h
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\games\game\baseobject.cpp
 	"BaseObject.h"
 
-1615291304 source:c:\users\hahung\onedrive\máy tính\game\games\game\main.cpp
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\games\game\character.cpp
+	"character.h"
+
+1615304905 c:\users\hahung\onedrive\máy tính\game\games\game\character.h
+	"BaseObject.h"
+
+1615304905 source:c:\users\hahung\onedrive\máy tính\game\games\game\main.cpp
 	"BaseObject.h"
 	"character.h"
+	"barrier.h"
 

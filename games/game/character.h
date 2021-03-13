@@ -28,9 +28,9 @@ class character
         //void render(LTexture character, SDL_Rect* clip, SDL_Renderer* gRenderer);
     private:
 		//The X and Y offsets of the dot
-		int mPosX, mPosY;
+		double mPosX, mPosY;
 
-		int status;
+		double status;
 
 };
 
