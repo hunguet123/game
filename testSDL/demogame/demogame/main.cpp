@@ -1,6 +1,9 @@
 #include "BaseObject.h"
 #include "character.h"
 #include "barrier.h"
+#include "grass.h"
+#include "fly.h"
+
 //Starts up SDL and creates window
 bool init();
 
@@ -18,11 +21,120 @@ SDL_Renderer* gRenderer = NULL;
 
 //Scene textures
 LTexture DinosourTexture;
-LTexture gBackground;
-LTexture barrierTexture;
+LTexture cactusTexture;
 LTexture plotTexture;
+LTexture treeTexture;
+LTexture cloudsTexture;
+LTexture birdTexture;
+
+character dinosaur;
+barrier cactus[4];
+grass plot;
+fly bird;
+grass Tree;
+grass Clouds;
+
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
+
+const int BIRD_ANIMATION_FRAMES = 9;
+SDL_Rect birdClips[ BIRD_ANIMATION_FRAMES ];
+
+int main( int argc, char* args[] )
+{
+	if( !init() )
+	{
+		printf( "Failed to initialize!\n" );
+	}
+	else
+	{
+		//Load media
+		if( !loadMedia() )
+		{
+			printf( "Failed to load media!\n" );
+		}
+		else
+		{
+			//Main loop flag
+			bool quit = false;
+
+			//Event handler
+			SDL_Event e;
+
+            int frame_charactor = 0;
+            int frame_bird = 0;
+
+
+			while( !quit )
+			{
+				//Handle events on queue
+				while( SDL_PollEvent( &e ) != 0 )
+				{
+					//User requests quit
+					if( e.type == SDL_QUIT )
+					{
+						quit = true;
+					}
+					dinosaur.handleEvent( e );
+				}
+
+				dinosaur.move();
+
+				cactus[0].move(4);
+                cactus[1].move(4);
+                cactus[2].move(4);
+                cactus[3].move(4);
+
+
+                plot.move(4);
+                Tree.move(1.5);
+				Clouds.move(0.5);
+				bird.move(6);
+				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+				SDL_RenderClear( gRenderer );
+
+                double Cloud_x = Clouds.x()- 1280;
+                double Cloud_y = Clouds.y() - 535;
+                cloudsTexture.render(Cloud_x, Cloud_y, NULL, gRenderer);
+                cloudsTexture.render(Cloud_x + 1280, Cloud_y, NULL, gRenderer);
+				Tree.render( treeTexture, gRenderer);
+
+                SDL_Rect* currentClip = &CharacterClips[ frame_charactor/6 ];
+
+                dinosaur.render(DinosourTexture, currentClip, gRenderer);
+
+                cactus[0].render(cactusTexture, NULL, gRenderer);
+                cactus[1].render(cactusTexture, NULL, gRenderer);
+                cactus[2].render(cactusTexture, NULL, gRenderer);
+                cactus[3].render(cactusTexture, NULL, gRenderer);
+
+
+                SDL_Rect* birdCurrentClip = &birdClips[frame_bird/9 ];
+
+                bird.render(birdTexture, birdCurrentClip, gRenderer );
+
+                double plotX = plot.x() - 1280 ;
+                double plotY = plot.y() + 62;
+                plotTexture.render(plotX,plotY,NULL,gRenderer);
+                plotTexture.render(plotX + 1280,plotY,NULL,gRenderer);
+				SDL_RenderPresent( gRenderer );
+				++frame_charactor;
+                ++frame_bird;
+				if (frame_bird / 9 >= BIRD_ANIMATION_FRAMES ) frame_bird = 0;
+				if( frame_charactor / 6 >= WALKING_ANIMATION_FRAMES )
+				{
+					frame_charactor = 0;
+				}
+			}
+		}
+	}
+
+	//Free resources and close SDL
+	close();
+
+	return 0;
+}
+
 
 bool init()
 {
@@ -80,18 +192,10 @@ bool init()
 
 bool loadMedia()
 {
-	//Loading success flag
 	bool success = true;
 
-	//Load dot texture
-	if( !DinosourTexture.loadFromFile( "img//char.png", gRenderer ) )
-	{
-		printf( "Failed to load dot texture!\n" );
-		success = false;
-	}
-        else
-    {
-        //Set sprite clips
+    DinosourTexture.loadFromFile( "img//char.png", gRenderer );
+{
         int x = 0, y = 0;
         for (int i = 0; i < 6; ++i)
         {
@@ -101,10 +205,23 @@ bool loadMedia()
 		CharacterClips[ i ].h =  57;
 		x+= 57;
         }
-	}
-	barrierTexture.loadFromFile("img//cactus.png", gRenderer);
+}
+	birdTexture.loadFromFile("img//bird1.png", gRenderer);
+    {
+    int x = 0, y = 0;
+    for (int i = 0; i < 9; i++)
+    {
+        birdClips[i].x = x;
+        birdClips[i].y = y;
+        birdClips[i].w = 80;
+        birdClips[i].h = 80;
+        x+= 80;
+    }
+    }
+	cactusTexture.loadFromFile("img//cactus.png", gRenderer);
 	plotTexture.loadFromFile("img//plot.png", gRenderer);
-	gBackground.loadFromFile("img//bk.png", gRenderer);
+	treeTexture.loadFromFile("img//tree.png", gRenderer);
+	cloudsTexture.loadFromFile("img//bk1.png", gRenderer);
 	return success;
 }
 
@@ -112,8 +229,10 @@ void close()
 {
 	//Free loaded images
 	DinosourTexture.free();
-    gBackground.free();
-    barrierTexture.free();
+    plotTexture.free();
+    cloudsTexture.free();
+    treeTexture.free();
+    cactusTexture.free();
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
@@ -124,85 +243,3 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 }
-
-int main( int argc, char* args[] )
-{
-	//Start up SDL and create window
-	if( !init() )
-	{
-		printf( "Failed to initialize!\n" );
-	}
-	else
-	{
-		//Load media
-		if( !loadMedia() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{
-			//Main loop flag
-			bool quit = false;
-
-			//Event handler
-			SDL_Event e;
-
-			character dinosaur;
-
-			barrier cactus;
-
-			barrier plot;
-            int frame = 0;
-			//While application is running
-			while( !quit )
-			{
-				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-					dinosaur.handleEvent( e );
-				}
-
-				dinosaur.move();
-                cactus.move();
-                plot.move();
-				//Clear screen
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
-				gBackground.render(0,0,NULL, gRenderer);
-                SDL_Rect* currentClip = &CharacterClips[ frame/6 ];
-				//Render Foo' to the screen
-                double PosX = dinosaur.PosX();
-                double PosY = dinosaur.PosY();
-                //dinosaur.render(Dinosour, currentClip, gRenderer);
-                DinosourTexture.render(PosX, PosY,currentClip, gRenderer);
-                //cactus.render(barrierTexture, gRenderer);
-                double CacTusX = cactus.x();
-                double CacTusY = cactus.y();
-                barrierTexture.render(CacTusX, CacTusY, NULL, gRenderer);
-
-                double plotX = plot.x() - 1280 ;
-                double plotY = plot.y() + 54;
-                plotTexture.render(plotX,plotY,NULL,gRenderer);
-				SDL_RenderPresent( gRenderer );
-				++frame;
-
-				//Cycle animation
-				if( frame / 6 >= WALKING_ANIMATION_FRAMES )
-				{
-					frame = 0;
-				}
-			}
-		}
-	}
-
-	//Free resources and close SDL
-	close();
-
-	return 0;
-}
-

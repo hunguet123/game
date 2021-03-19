@@ -1,19 +1,17 @@
 #ifndef BARRIER_H_
 #define BARRIER_H_
-
 #include "BaseObject.h"
-
+#include<ctime>
+#include<algorithm>
 class barrier
 {
     public:
-        double barrier_speed = 3;
 
         barrier();
-
-        void move();
+        void move(double speed);
         double y();
         double x();
-        //void render(LTexture barrierTexture, SDL_Renderer* gRenderer);
+        void render(LTexture &barrierTexture, SDL_Rect* clips, SDL_Renderer* gRenderer);
     private:
         double PosY;
         double PosX;

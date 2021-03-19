@@ -1,28 +1,45 @@
 # depslib dependency file v1.0
-1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
+1616159996 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
 	"BaseObject.h"
 
-1615652432 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
+1616085362 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
-	<SDL_mixer.h>
 
-1615645428 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+1616168903 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
 	"BaseObject.h"
 	"character.h"
 	"barrier.h"
+	"grass.h"
+	"fly.h"
 
-1615304905 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
+1616122683 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
 	"character.h"
 
-1615304905 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
+1616122684 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
 	"BaseObject.h"
 
-1615304977 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
+1616167094 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
 	"BaseObject.h"
+	<ctime>
+	<algorithm>
 
-1615645269 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
+1616169363 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
 	"barrier.h"
+
+1616169363 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.cpp
+	"grass.h"
+
+1616122844 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.h
+	"BaseObject.h"
+
+1616167289 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.h
+	"BaseObject.h"
+	<ctime>
+	<algorithm>
+
+1616169487 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.cpp
+	"fly.h"
 

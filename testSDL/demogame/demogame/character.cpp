@@ -7,6 +7,7 @@ character::character()
     mPosY = 550;
 }
 
+
 void character::handleEvent( SDL_Event& e )
 {
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
@@ -15,7 +16,7 @@ void character::handleEvent( SDL_Event& e )
 		{
 			case SDLK_UP:
             status = JUMP;
-
+            if (mPosY < 550 ) status = FALL;
         }
     }
 
@@ -38,18 +39,8 @@ void character::move()
 }
 
 
-double character::PosX()
-{
-    //Show the dot
-	return mPosX;
-}
-double character::PosY()
-{
-    return mPosY;
-}
-
-/*void character::render(LTexture character, SDL_Rect* clip, SDL_Renderer* gRenderer)
+void character::render(LTexture &character, SDL_Rect* clip, SDL_Renderer* gRenderer)
 {
     character.render(mPosX, mPosY, clip, gRenderer);
-}*/
+}
 

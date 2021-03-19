@@ -9,28 +9,26 @@
 class character
 {
     public:
-		//The dimensions of the dot
+
 		static const int CHARACTER_JUMP_SPEED = 8;
 		static const int CHARACTER_FALL_SPEED = 8;
 
-		//Initializes the variables
+
 		character();
 
-		//Takes key presses and adjusts the dot's velocity
+
 		void handleEvent( SDL_Event& e );
 
-		//Moves the dot
+
 		void move();
 
-		//Shows the dot on the screen
-		double PosX();
-		double PosY();
-        //void render(LTexture character, SDL_Rect* clip, SDL_Renderer* gRenderer);
+
+        void render(LTexture &character, SDL_Rect* clip, SDL_Renderer* gRenderer);
     private:
-		//The X and Y offsets of the dot
+
 		double mPosX, mPosY;
 
-		double status;
+		int status;
 
 };
 
