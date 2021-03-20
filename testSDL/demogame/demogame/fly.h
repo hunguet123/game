@@ -1,19 +1,20 @@
 #ifndef FLY_H_
-#define FLY_H
-#include"BaseObject.h"
-#include <ctime>
-#include <algorithm>
+#define FLY_H_
+#include "BaseObject.h"
+
 class fly
 {
     public:
         fly();
-        void move(double fly_speed );
-
-        void render(LTexture &flyTexture, SDL_Rect* clip, SDL_Renderer *gRenderer);
-
+        void move(double speed);
+        void stop(double speed);
+        void render(LTexture& birdTexture, SDL_Rect* clip, SDL_Renderer* gRenderer);
+        double X();
+        double Y();
     private:
         double Fx;
         double Fy;
+
 };
 
-#endif // BIRD_H_
+#endif // FLY_H_

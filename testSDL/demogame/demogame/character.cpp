@@ -26,7 +26,7 @@ void character::move()
 {
     if (status == JUMP && mPosY >= 350)
 	{
-		mPosY += -CHARACTER_JUMP_SPEED;
+		mPosY -= CHARACTER_JUMP_SPEED;
 	}
 	if (mPosY <= 350)
 	{
@@ -38,6 +38,30 @@ void character::move()
 	}
 }
 
+void character::stop()
+{
+    if (status == JUMP && mPosY >= 350)
+	{
+		mPosY += CHARACTER_JUMP_SPEED;
+	}
+	if (mPosY <= 350)
+	{
+		status = FALL;
+	}
+	if (status == FALL && mPosY < 550)
+	{
+		mPosY -= CHARACTER_FALL_SPEED;
+	}
+}
+double character::X()
+ {
+    return mPosX;
+}
+
+double character::Y()
+{
+    return mPosY;
+}
 
 void character::render(LTexture &character, SDL_Rect* clip, SDL_Renderer* gRenderer)
 {

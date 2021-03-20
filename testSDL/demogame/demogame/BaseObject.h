@@ -4,7 +4,7 @@
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
-
+#include <algorithm>
 //Screen dimension constants
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 700;

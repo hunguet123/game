@@ -6,6 +6,7 @@
 #define JUMP 1
 #define FALL 2
 
+
 class character
 {
     public:
@@ -22,6 +23,9 @@ class character
 
 		void move();
 
+        void stop();
+		double X();
+		double Y();
 
         void render(LTexture &character, SDL_Rect* clip, SDL_Renderer* gRenderer);
     private:

@@ -2,8 +2,9 @@
 #include "character.h"
 #include "barrier.h"
 #include "grass.h"
+#include "checkCollision.h"
 #include "fly.h"
-
+#include <ctime>
 //Starts up SDL and creates window
 bool init();
 
@@ -27,12 +28,6 @@ LTexture treeTexture;
 LTexture cloudsTexture;
 LTexture birdTexture;
 
-character dinosaur;
-barrier cactus[4];
-grass plot;
-fly bird;
-grass Tree;
-grass Clouds;
 
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
@@ -42,6 +37,14 @@ SDL_Rect birdClips[ BIRD_ANIMATION_FRAMES ];
 
 int main( int argc, char* args[] )
 {
+    srand(time(0));
+
+character dinosaur;
+barrier cactus[4];
+grass plot;
+grass Tree;
+grass Clouds;
+fly bird;
 	if( !init() )
 	{
 		printf( "Failed to initialize!\n" );
@@ -79,22 +82,50 @@ int main( int argc, char* args[] )
 				}
 
 				dinosaur.move();
-
 				cactus[0].move(4);
                 cactus[1].move(4);
                 cactus[2].move(4);
                 cactus[3].move(4);
-
-
+                bird.move(6);
                 plot.move(4);
                 Tree.move(1.5);
 				Clouds.move(0.5);
-				bird.move(6);
+
+
+                if (check_collision_character_barrier(dinosaur, cactus[0]) || check_collision_character_barrier(dinosaur, cactus[1]) || check_collision_character_barrier(dinosaur, cactus[2] ) || check_collision_character_barrier(dinosaur, cactus[3]) )
+                { dinosaur.stop();
+                cactus[0].stop(4);
+                cactus[1].stop(4);
+                cactus[2].stop(4);
+                cactus[3].stop(4);
+                plot.stop(4);
+                Tree.stop(1.5);
+                Clouds.stop(0.5);
+                bird.stop(6);
+                frame_charactor--;
+                frame_bird--;
+                }
+
+                if (check_collision_character_bird(dinosaur, bird))
+                {
+                     dinosaur.stop();
+                cactus[0].stop(4);
+                cactus[1].stop(4);
+                cactus[2].stop(4);
+                cactus[3].stop(4);
+                plot.stop(4);
+                Tree.stop(1.5);
+                Clouds.stop(0.5);
+                bird.stop(6);
+                frame_charactor--;
+                frame_bird--;
+                }
+
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
 
-                double Cloud_x = Clouds.x()- 1280;
-                double Cloud_y = Clouds.y() - 535;
+                double Cloud_x = Clouds.X()- 1280;
+                double Cloud_y = Clouds.Y() - 535;
                 cloudsTexture.render(Cloud_x, Cloud_y, NULL, gRenderer);
                 cloudsTexture.render(Cloud_x + 1280, Cloud_y, NULL, gRenderer);
 				Tree.render( treeTexture, gRenderer);
@@ -113,8 +144,8 @@ int main( int argc, char* args[] )
 
                 bird.render(birdTexture, birdCurrentClip, gRenderer );
 
-                double plotX = plot.x() - 1280 ;
-                double plotY = plot.y() + 62;
+                double plotX = plot.X() - 1280 ;
+                double plotY = plot.Y() + 62;
                 plotTexture.render(plotX,plotY,NULL,gRenderer);
                 plotTexture.render(plotX + 1280,plotY,NULL,gRenderer);
 				SDL_RenderPresent( gRenderer );

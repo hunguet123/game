@@ -10,10 +10,12 @@ class grass
 
         void move(double grass_speed );
 
+        void stop(double grass_speed );
+
         void render(LTexture &grassTexture, SDL_Renderer *gRenderer);
 
-        double x();
-        double y();
+        double X();
+        double Y();
     private:
         double Gx;
         double Gy;

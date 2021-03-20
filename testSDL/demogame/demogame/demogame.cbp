@@ -38,6 +38,8 @@
 		<Unit filename="barrier.h" />
 		<Unit filename="character.cpp" />
 		<Unit filename="character.h" />
+		<Unit filename="checkCollision.cpp" />
+		<Unit filename="checkCollision.h" />
 		<Unit filename="fly.cpp" />
 		<Unit filename="fly.h" />
 		<Unit filename="grass.cpp" />

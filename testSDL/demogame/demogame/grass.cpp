@@ -13,18 +13,25 @@ void grass::move(double grass_speed )
     grass_speed += 0.005;
 }
 
+void grass::stop(double grass_speed )
+{
+    if (Gx < 0 ) Gx = 1280;
+    Gx += grass_speed;
+    grass_speed += 0.005;
+}
+
 void grass::render(LTexture &grassTexture, SDL_Renderer* gRenderer )
 {
     grassTexture.render(Gx, Gy, NULL, gRenderer);
     grassTexture.render(Gx - 1280, Gy, NULL, gRenderer);
 }
 
-double grass::x()
+double grass::X()
 {
     return Gx;
 }
 
-double grass::y()
+double grass::Y()
 {
     return Gy;
 }
