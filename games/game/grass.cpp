@@ -10,14 +10,12 @@ void grass::move(double grass_speed )
 {
     if (Gx < 0 ) Gx = 1280;
     Gx -= grass_speed;
-    grass_speed += 0.005;
 }
 
 void grass::stop(double grass_speed )
 {
     if (Gx < 0 ) Gx = 1280;
     Gx += grass_speed;
-    grass_speed += 0.005;
 }
 
 void grass::render(LTexture &grassTexture, SDL_Renderer* gRenderer )

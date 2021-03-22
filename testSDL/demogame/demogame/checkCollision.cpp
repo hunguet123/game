@@ -10,13 +10,13 @@ bool check_collision_character_barrier(character dinosour, barrier cactus )
 
     //Calculate the sides of rect A
     leftDinosour = dinosour.X();
-    rightDinosour = dinosour.X() + 25;
+    rightDinosour = dinosour.X() + 30;
     topDinosour = dinosour.Y();
     bottomDinosour = dinosour.Y() + 30;
 
     //Calculate the sides of rect B
-    leftCactus = cactus.X();
-    rightCactus = cactus.X() + 25;
+    leftCactus = cactus.X() + 15;
+    rightCactus = cactus.X() + 30;
     topCactus = cactus.Y();
     bottomCactus = cactus.Y() + 30;
 
@@ -60,10 +60,10 @@ bool check_collision_character_bird(character dinosour, fly bird)
     bottomDinosour = dinosour.Y() + 30;
 
     //Calculate the sides of rect B
-    leftBird = bird.X();
-    rightBird = bird.X() + 45;
+    leftBird = bird.X() + 15;
+    rightBird = bird.X() + 20;
     topBird = bird.Y();
-    bottomBird = bird.Y() + 30;
+    bottomBird = bird.Y() + 10;
 
     //If any of the sides from A are outside of B
     if( bottomDinosour <= topBird )

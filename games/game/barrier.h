@@ -15,7 +15,7 @@ class barrier
         double Y();
         double X();
         void render(LTexture &barrierTexture, SDL_Rect* clips, SDL_Renderer* gRenderer);
-    private:
+
         double PosY;
         double PosX;
 

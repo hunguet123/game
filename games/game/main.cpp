@@ -23,11 +23,12 @@ SDL_Renderer* gRenderer = NULL;
 //Scene textures
 LTexture DinosourTexture;
 LTexture cactusTexture;
+LTexture cactus1Texture;
 LTexture plotTexture;
 LTexture treeTexture;
 LTexture cloudsTexture;
 LTexture birdTexture;
-
+LTexture GameOverTexture;
 
 const int WALKING_ANIMATION_FRAMES = 6;
 SDL_Rect CharacterClips[ WALKING_ANIMATION_FRAMES ];
@@ -40,7 +41,15 @@ int main( int argc, char* args[] )
     srand(time(0));
 
 character dinosaur;
-barrier cactus[4];
+barrier cactus[3];
+
+cactus[0].PosX = 1280;
+cactus[0].PosY = 545;
+cactus[1].PosX = cactus[0].PosX + rand() % 200 + 300 - 10;
+cactus[1].PosY = 535;
+cactus[2].PosX = cactus[1].PosX + rand() % 200 + 300;
+cactus[2].PosY = 545;
+
 grass plot;
 grass Tree;
 grass Clouds;
@@ -60,14 +69,15 @@ fly bird;
 		{
 			//Main loop flag
 			bool quit = false;
-
+            bool gameOver = false;;
 			//Event handler
 			SDL_Event e;
 
             int frame_charactor = 0;
             int frame_bird = 0;
+            int time = 0;
 
-
+            double speed = 5;
 			while( !quit )
 			{
 				//Handle events on queue
@@ -81,44 +91,41 @@ fly bird;
 					dinosaur.handleEvent( e );
 				}
 
-				dinosaur.move();
-				cactus[0].move(4);
-                cactus[1].move(4);
-                cactus[2].move(4);
-                cactus[3].move(4);
-                bird.move(6);
-                plot.move(4);
-                Tree.move(1.5);
-				Clouds.move(0.5);
-
-
-                if (check_collision_character_barrier(dinosaur, cactus[0]) || check_collision_character_barrier(dinosaur, cactus[1]) || check_collision_character_barrier(dinosaur, cactus[2] ) || check_collision_character_barrier(dinosaur, cactus[3]) )
-                { dinosaur.stop();
-                cactus[0].stop(4);
-                cactus[1].stop(4);
-                cactus[2].stop(4);
-                cactus[3].stop(4);
-                plot.stop(4);
-                Tree.stop(1.5);
-                Clouds.stop(0.5);
-                bird.stop(6);
-                frame_charactor--;
-                frame_bird--;
-                }
-
-                if (check_collision_character_bird(dinosaur, bird))
+                if (check_collision_character_barrier(dinosaur, cactus[0]) || check_collision_character_barrier(dinosaur, cactus[1])
+                || check_collision_character_barrier(dinosaur, cactus[2] ) || check_collision_character_bird(dinosaur, bird) )
                 {
-                     dinosaur.stop();
-                cactus[0].stop(4);
-                cactus[1].stop(4);
-                cactus[2].stop(4);
-                cactus[3].stop(4);
-                plot.stop(4);
-                Tree.stop(1.5);
-                Clouds.stop(0.5);
-                bird.stop(6);
+                dinosaur.move();
+				cactus[0].move(speed);
+                cactus[1].move(speed);
+                cactus[2].move(speed);
+                if(time > 1000) bird.move(speed + 4);
+                plot.move(speed);
+                Tree.move(speed - 2);
+				Clouds.move(speed - 4);
+
+                dinosaur.stop();
+                cactus[0].stop(speed);
+                cactus[1].stop(speed);
+                cactus[2].stop(speed);
+                plot.stop(speed);
+                Tree.stop(speed - 2);
+                Clouds.stop(speed - 4);
+                bird.stop(speed + 4);
                 frame_charactor--;
                 frame_bird--;
+                gameOver = true;
+                }
+                else
+                {
+                dinosaur.move();
+				cactus[0].move(speed);
+                cactus[1].move(speed);
+                cactus[2].move(speed);
+                if(time > 1000) bird.move(speed + 4);
+                plot.move(speed);
+                Tree.move(speed - 2);
+				Clouds.move(speed - 4);
+				speed += 0.0005;
                 }
 
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
@@ -135,10 +142,8 @@ fly bird;
                 dinosaur.render(DinosourTexture, currentClip, gRenderer);
 
                 cactus[0].render(cactusTexture, NULL, gRenderer);
-                cactus[1].render(cactusTexture, NULL, gRenderer);
+                cactus[1].render(cactus1Texture, NULL, gRenderer);
                 cactus[2].render(cactusTexture, NULL, gRenderer);
-                cactus[3].render(cactusTexture, NULL, gRenderer);
-
 
                 SDL_Rect* birdCurrentClip = &birdClips[frame_bird/9 ];
 
@@ -148,6 +153,8 @@ fly bird;
                 double plotY = plot.Y() + 62;
                 plotTexture.render(plotX,plotY,NULL,gRenderer);
                 plotTexture.render(plotX + 1280,plotY,NULL,gRenderer);
+
+                if (gameOver) GameOverTexture.render(0, 0, NULL, gRenderer);
 				SDL_RenderPresent( gRenderer );
 				++frame_charactor;
                 ++frame_bird;
@@ -156,6 +163,7 @@ fly bird;
 				{
 					frame_charactor = 0;
 				}
+				time++;
 			}
 		}
 	}
@@ -250,9 +258,11 @@ bool loadMedia()
     }
     }
 	cactusTexture.loadFromFile("img//cactus.png", gRenderer);
+	cactus1Texture.loadFromFile("img//cactus1.png", gRenderer);
 	plotTexture.loadFromFile("img//plot.png", gRenderer);
 	treeTexture.loadFromFile("img//tree.png", gRenderer);
 	cloudsTexture.loadFromFile("img//bk1.png", gRenderer);
+	GameOverTexture.loadFromFile("img//game_over.png", gRenderer);
 	return success;
 }
 

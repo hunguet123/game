@@ -2,46 +2,45 @@
 1616159996 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.cpp
 	"BaseObject.h"
 
-1616085362 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
+1616253928 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\baseobject.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
 	<string>
+	<algorithm>
 
-1616249161 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+1616421907 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
 	"BaseObject.h"
 	"character.h"
 	"barrier.h"
 	"grass.h"
 	"checkCollision.h"
+	"fly.h"
+	<ctime>
 
-1616244620 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
+1616412126 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
 	"character.h"
 
 1616243698 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
 	"BaseObject.h"
 
-1616244516 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
+1616409082 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
 	"BaseObject.h"
 	"character.h"
-	<ctime>
-	<algorithm>
 
-1616248804 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
+1616409569 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
 	"barrier.h"
 
-1616247563 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.cpp
+1616336262 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.cpp
 	"grass.h"
 
 1616247563 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.h
 	"BaseObject.h"
 
-1616250753 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.h
+1616252900 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.h
 	"BaseObject.h"
-	<ctime>
-	<algorithm>
 
-1616248351 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.cpp
+1616409019 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.cpp
 	"fly.h"
 
 1616169363 source:c:\users\hahung\onedrive\máy tính\game\games\game\barrier.cpp
@@ -88,15 +87,15 @@
 	"grass.h"
 	"fly.h"
 
-1616248513 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\checkcollision.h
+1616253670 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\checkcollision.h
 	"barrier.h"
 	"character.h"
 	"fly.h"
 
-1616248899 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\checkcollision.cpp
+1616411577 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\checkcollision.cpp
 	"checkCollision.h"
 
-1616248804 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\barrier.cpp
+1616298769 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\barrier.cpp
 	"barrier.h"
 
 1616253928 c:\users\hahung\onedrive\máy tính\game\games\demogame\barrier.h
@@ -119,7 +118,7 @@
 1616244620 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\character.cpp
 	"character.h"
 
-1616253867 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\checkcollision.cpp
+1616299192 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\checkcollision.cpp
 	"checkCollision.h"
 
 1616253670 c:\users\hahung\onedrive\máy tính\game\games\demogame\checkcollision.h
@@ -130,16 +129,16 @@
 1616252900 c:\users\hahung\onedrive\máy tính\game\games\demogame\fly.h
 	"BaseObject.h"
 
-1616253028 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\fly.cpp
+1616299035 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\fly.cpp
 	"fly.h"
 
-1616247563 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\grass.cpp
+1616298600 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\grass.cpp
 	"grass.h"
 
 1616247563 c:\users\hahung\onedrive\máy tính\game\games\demogame\grass.h
 	"BaseObject.h"
 
-1616253928 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\main.cpp
+1616299113 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\main.cpp
 	"BaseObject.h"
 	"character.h"
 	"barrier.h"
