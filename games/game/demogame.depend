@@ -9,23 +9,24 @@
 	<string>
 	<algorithm>
 
-1616421907 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
-	"BaseObject.h"
-	"character.h"
+1617511590 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\main.cpp
+	"GameBase.h"
+	"LTexture.h"
 	"barrier.h"
 	"grass.h"
-	"checkCollision.h"
 	"fly.h"
-	<ctime>
+	"checkCollision.h"
+	<iostream>
 
-1616412126 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
+1616900132 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.cpp
 	"character.h"
 
-1616243698 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
-	"BaseObject.h"
+1616857784 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\character.h
+	"LTexture.h"
+	"GameBase.h"
 
-1616409082 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
-	"BaseObject.h"
+1616824796 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.h
+	"LTexture.h"
 	"character.h"
 
 1616409569 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\barrier.cpp
@@ -34,22 +35,21 @@
 1616336262 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.cpp
 	"grass.h"
 
-1616247563 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.h
-	"BaseObject.h"
+1616515572 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\grass.h
+	"LTexture.h"
 
-1616252900 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.h
-	"BaseObject.h"
+1616515572 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.h
+	"LTexture.h"
 
 1616409019 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\fly.cpp
 	"fly.h"
 
-1616169363 source:c:\users\hahung\onedrive\máy tính\game\games\game\barrier.cpp
+1616409569 source:c:\users\hahung\onedrive\máy tính\game\games\game\barrier.cpp
 	"barrier.h"
 
-1616167094 c:\users\hahung\onedrive\máy tính\game\games\game\barrier.h
-	"BaseObject.h"
-	<ctime>
-	<algorithm>
+1616824796 c:\users\hahung\onedrive\máy tính\game\games\game\barrier.h
+	"LTexture.h"
+	"character.h"
 
 1616085362 c:\users\hahung\onedrive\máy tính\game\games\game\baseobject.h
 	<SDL.h>
@@ -60,39 +60,40 @@
 1616159996 source:c:\users\hahung\onedrive\máy tính\game\games\game\baseobject.cpp
 	"BaseObject.h"
 
-1616122683 source:c:\users\hahung\onedrive\máy tính\game\games\game\character.cpp
+1616900132 source:c:\users\hahung\onedrive\máy tính\game\games\game\character.cpp
 	"character.h"
 
-1616122684 c:\users\hahung\onedrive\máy tính\game\games\game\character.h
-	"BaseObject.h"
+1616857784 c:\users\hahung\onedrive\máy tính\game\games\game\character.h
+	"LTexture.h"
+	"GameBase.h"
 
-1616169487 source:c:\users\hahung\onedrive\máy tính\game\games\game\fly.cpp
+1616409019 source:c:\users\hahung\onedrive\máy tính\game\games\game\fly.cpp
 	"fly.h"
 
-1616167289 c:\users\hahung\onedrive\máy tính\game\games\game\fly.h
-	"BaseObject.h"
-	<ctime>
-	<algorithm>
+1616515572 c:\users\hahung\onedrive\máy tính\game\games\game\fly.h
+	"LTexture.h"
 
-1616169363 source:c:\users\hahung\onedrive\máy tính\game\games\game\grass.cpp
+1616336262 source:c:\users\hahung\onedrive\máy tính\game\games\game\grass.cpp
 	"grass.h"
 
-1616122844 c:\users\hahung\onedrive\máy tính\game\games\game\grass.h
-	"BaseObject.h"
+1616515572 c:\users\hahung\onedrive\máy tính\game\games\game\grass.h
+	"LTexture.h"
 
-1616169590 source:c:\users\hahung\onedrive\máy tính\game\games\game\main.cpp
-	"BaseObject.h"
-	"character.h"
+1617530121 source:c:\users\hahung\onedrive\máy tính\game\games\game\main.cpp
+	"GameBase.h"
+	"LTexture.h"
 	"barrier.h"
 	"grass.h"
 	"fly.h"
+	"checkCollision.h"
+	<iostream>
 
 1616253670 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\checkcollision.h
 	"barrier.h"
 	"character.h"
 	"fly.h"
 
-1616411577 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\checkcollision.cpp
+1616760823 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\checkcollision.cpp
 	"checkCollision.h"
 
 1616298769 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\barrier.cpp
@@ -154,4 +155,68 @@
 
 1616251817 source:c:\users\hahung\onedrive\máy tính\game\games\demogame\flying.cpp
 	"flying.h"
+
+1617442819 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\ltexture.h
+	"GameBase.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<algorithm>
+
+1617442819 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\ltexture.cpp
+	"LTexture.h"
+
+1617452845 c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\gamebase.h
+	<ctime>
+	<SDL.h>
+	<SDL_mixer.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<stdio.h>
+	<string>
+	<sstream>
+	<algorithm>
+	<fstream>
+
+1617452845 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\gamebase.cpp
+	"GameBase.h"
+
+1616516378 source:c:\users\hahung\onedrive\máy tính\game\testsdl\demogame\demogame\button.cpp
+
+1617442819 c:\users\hahung\onedrive\máy tính\game\games\game\ltexture.h
+	"GameBase.h"
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<algorithm>
+
+1617452845 c:\users\hahung\onedrive\máy tính\game\games\game\gamebase.h
+	<ctime>
+	<SDL.h>
+	<SDL_mixer.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+	<stdio.h>
+	<string>
+	<sstream>
+	<algorithm>
+	<fstream>
+
+1616516378 source:c:\users\hahung\onedrive\máy tính\game\games\game\button.cpp
+
+1616760823 source:c:\users\hahung\onedrive\máy tính\game\games\game\checkcollision.cpp
+	"checkCollision.h"
+
+1616253670 c:\users\hahung\onedrive\máy tính\game\games\game\checkcollision.h
+	"barrier.h"
+	"character.h"
+	"fly.h"
+
+1617452845 source:c:\users\hahung\onedrive\máy tính\game\games\game\gamebase.cpp
+	"GameBase.h"
+
+1617442819 source:c:\users\hahung\onedrive\máy tính\game\games\game\ltexture.cpp
+	"LTexture.h"
 

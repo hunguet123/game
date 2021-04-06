@@ -55,13 +55,13 @@ bool check_collision_character_bird(character dinosour, fly bird)
 
     //Calculate the sides of rect A
     leftDinosour = dinosour.X();
-    rightDinosour = dinosour.X() + 25;
+    rightDinosour = dinosour.X() + 30;
     topDinosour = dinosour.Y();
     bottomDinosour = dinosour.Y() + 30;
 
     //Calculate the sides of rect B
-    leftBird = bird.X() + 15;
-    rightBird = bird.X() + 20;
+    leftBird = bird.X() ;
+    rightBird = bird.X() + 45;
     topBird = bird.Y();
     bottomBird = bird.Y() + 10;
 

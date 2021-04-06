@@ -1,6 +1,6 @@
 #ifndef FLY_H_
 #define FLY_H_
-#include "BaseObject.h"
+#include "LTexture.h"
 
 class fly
 {

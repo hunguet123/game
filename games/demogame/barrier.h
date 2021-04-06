@@ -1,13 +1,12 @@
 #ifndef BARRIER_H_
 #define BARRIER_H_
-#include "BaseObject.h"
+#include "LTexture.h"
 #include "character.h"
 
 
 class barrier
 {
-    public:
-
+        public:
         barrier();
         void move(double speed );
 

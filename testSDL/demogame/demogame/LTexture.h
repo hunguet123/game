@@ -1,15 +1,12 @@
 #ifndef BASEOBJECT_H_
 #define BASEOBJECT_H_
+#include "GameBase.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
 #include <algorithm>
-//Screen dimension constants
-const int SCREEN_WIDTH = 1200;
-const int SCREEN_HEIGHT = 700;
 
-//Texture wrapper class
 class LTexture
 {
 	public:
@@ -21,6 +18,11 @@ class LTexture
 
 		//Loads image at specified path
 		bool loadFromFile( std::string path, SDL_Renderer* gRenderer );
+
+		#if defined(SDL_TTF_MAJOR_VERSION)
+		//Creates image from font string
+		bool loadFromRenderedText( std::string textureText, SDL_Color textColor, SDL_Renderer* gRenderer, TTF_Font* gFont );
+		#endif
 
 		//Deallocates texture
 		void free();

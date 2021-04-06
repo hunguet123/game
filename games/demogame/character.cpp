@@ -8,15 +8,22 @@ character::character()
 }
 
 
-void character::handleEvent( SDL_Event& e )
+void character::handleEvent( SDL_Event& e, Mix_Chunk* gJump )
 {
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
 	{
 		switch (e.key.keysym.sym)
 		{
-			case SDLK_UP:
+			case SDLK_SPACE:
             status = JUMP;
+            Mix_PlayChannel(-1, gJump, 0);
             if (mPosY < 550 ) status = FALL;
+            break;
+            case SDLK_UP:
+            status = JUMP;
+            Mix_PlayChannel(-1, gJump, 0);
+            if (mPosY < 550 ) status = FALL;
+                break;
         }
     }
 

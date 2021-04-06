@@ -1,6 +1,6 @@
 #ifndef GRASS_H_
 #define GRASS_H_
-#include "BaseObject.h"
+#include "LTexture.h"
 
 class grass
 {

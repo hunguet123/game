@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H_
 #define CHARACTER_H_
-#include "BaseObject.h"
-
+#include "LTexture.h"
+#include "GameBase.h"
 
 #define JUMP 1
 #define FALL 2
@@ -11,14 +11,14 @@ class character
 {
     public:
 
-		static const int CHARACTER_JUMP_SPEED = 8;
-		static const int CHARACTER_FALL_SPEED = 8;
-
+		int CHARACTER_JUMP_SPEED = 8;
+		int CHARACTER_FALL_SPEED = 8;
+        int t = 0;
 
 		character();
 
 
-		void handleEvent( SDL_Event& e );
+		void handleEvent( SDL_Event& e, Mix_Chunk* gJump );
 
 
 		void move();
